@@ -3,6 +3,9 @@ title: "Workout 01"
 author: "Ana Comesana"
 output: github_document
 ---
+```{r}
+library(dplyr)
+```
 
 
 # Report
@@ -113,7 +116,7 @@ l_4_mins_df$made <- (last_4_mins %>%
           filter(shot_made_flag == 'shot_yes'))$n
           
 
-l_4_mins_df$perc_made <- l_4_mins_df$made/l_4_mins_df_df$total
+l_4_mins_df$perc_made <- l_4_mins_df$made/l_4_mins_df$total
 
 
 
