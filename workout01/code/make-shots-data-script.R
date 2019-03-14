@@ -24,7 +24,7 @@ durant <- read.csv('../data/kevin-durant.csv', stringsAsFactors = FALSE)
 thompson <- read.csv('../data/klay-thompson.csv', stringsAsFactors = FALSE)
 curry <-  read.csv('../data/stephen-curry.csv', stringsAsFactors = FALSE)
 
-## Setting up column nam
+## Setting up column name
 iguodala['name'] = 'Andre Iguodala'
 green['name'] = 'Draymond Green'
 durant['name'] = 'Kevin Durant'
@@ -32,25 +32,30 @@ thompson['name'] = 'Klay Thompson'
 curry['name'] = 'Stephen Curry'
 
 ## Change shot_made_flag
-iguodala_idx = which(iguodala['shot_made_flag'] == 'y')
-iguodala[iguodala_idx,'shot_made_flag'] = 'shot_yes'
-iguodala[-iguodala_idx,'shot_made_flag'] = "shot_no"
+iguodala_idx_y = which(iguodala['shot_made_flag'] == 'y')
+iguodala_idx_n = which(iguodala['shot_made_flag'] == 'n')
+iguodala[iguodala_idx_y,'shot_made_flag'] = 'shot_yes'
+iguodala[iguodala_idx_n,'shot_made_flag'] = 'shot_no'
 
-green_idx = which(green['shot_made_flag'] == 'y')
-green[green_idx,'shot_made_flag'] = 'shot_yes'
-green[-green_idx,'shot_made_flag'] = "shot_no"
+green_idx_y = which(green['shot_made_flag'] == 'y')
+green_idx_n = which(green['shot_made_flag'] == 'n')
+green[green_idx_y,'shot_made_flag'] = 'shot_yes'
+green[green_idx_n,'shot_made_flag'] = "shot_no"
 
-durant_idx = which(durant['shot_made_flag'] == 'y')
-durant[durant_idx,'shot_made_flag'] = 'shot_yes'
-durant[-durant_idx,'shot_made_flag'] = "shot_no"
+durant_idx_y = which(durant['shot_made_flag'] == 'y')
+durant_idx_n = which(durant['shot_made_flag'] == 'n')
+durant[durant_idx_y,'shot_made_flag'] = 'shot_yes'
+durant[durant_idx_n,'shot_made_flag'] = "shot_no"
 
-thompson_idx = which(thompson['shot_made_flag'] == 'y')
-thompson[thompson_idx,'shot_made_flag'] = 'shot_yes'
-thompson[-thompson_idx,'shot_made_flag'] = "shot_no"
+thompson_idx_y = which(thompson['shot_made_flag'] == 'y')
+thompson_idx_n = which(thompson['shot_made_flag'] == 'n')
+thompson[thompson_idx_y,'shot_made_flag'] = 'shot_yes'
+thompson[-thompson_idx_n,'shot_made_flag'] = "shot_no"
 
-curry_idx = which(curry['shot_made_flag'] == 'y')
-curry[curry_idx,'shot_made_flag'] = 'shot_yes'
-curry[-curry_idx,'shot_made_flag'] = "shot_no"
+curry_idx_y = which(curry['shot_made_flag'] == 'y')
+curry_idx_n = which(curry['shot_made_flag'] == 'n')
+curry[curry_idx_y,'shot_made_flag'] = 'shot_yes'
+curry[curry_idx_n,'shot_made_flag'] = "shot_no"
 
 
 ## Add column minute

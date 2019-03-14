@@ -5,13 +5,14 @@ output: github_document
 ---
 ```{r}
 library(dplyr)
+library(ggplot2)
 ```
 
 
 # Report
 
 ## Introduction
-The Golden Statw Warriors are without a doubt one of the top NBA teams at the moment, but which player within the team is the true "cream of the crop"? To find this, I will look at the proportion of shots made, and what type of shots in relation to how much of the period has passed. This report attempts to analyze the performance of Golden State Warriors Andre Iguodala, Draymond Green, Kevin Durant, Klay Thompson and Stephen Curry by looking at the proportion of shots they are able to make and how it changes as the game goes on.
+The Golden State Warriors are without a doubt one of the top NBA teams at the moment, but which player within the team is the true "cream of the crop"? To find this, I will look at the proportion of shots made, and what type of shots in relation to how much of the period has passed. This report attempts to analyze the performance of Golden State Warriors Andre Iguodala, Draymond Green, Kevin Durant, Klay Thompson and Stephen Curry by looking at the proportion of shots they are able to make and how it changes as the game goes on.
 
 ## Motivation
 Making shots throughout the game is what every basketball player is paid to do, but which Golden State Warrior player can make the higher proportion of shots in the last couple of minutes of each period? What truly separates a good athlete from a great one is the ability to keep their calm and perform when the pressure is on- usually the last minutes of each period, when the counter is going down and the buzzer about to go off. This offers a good measure of how good a player is, their performance when stressed and tired.
@@ -20,7 +21,7 @@ Making shots throughout the game is what every basketball player is paid to do, 
 Below are some basic statistics relating to this report:
 
 1. 2 Point Effective Shooting Percentage by Player:
-```{r}
+```{r,echo=FALSE}
 all_shooting_data <- read.csv('../data/shots-data.csv')
 all_2pters_data <- filter(all_shooting_data, shot_type == '2PT Field Goal')
 esp_2pt<- all_2pters_data %>%
@@ -40,7 +41,7 @@ esp_2pt
 ```
 
 2. 3 Point Effective Shooting Percentage by Player:
-```{r}
+```{r,echo=FALSE}
 all_3pters_data <- filter(all_shooting_data, shot_type == '3PT Field Goal')
 
 esp_3pt<- all_3pters_data %>%
@@ -60,7 +61,7 @@ esp_3pt
 ```
 
 3. Overall Effective Shooting Percentage by Player:
-```{r}
+```{r,echo=FALSE}
 cum_esp<- all_shooting_data %>%
             group_by(name) %>%
             summarise(total=n())
@@ -118,8 +119,6 @@ l_4_mins_df$made <- (last_4_mins %>%
 
 l_4_mins_df$perc_made <- l_4_mins_df$made/l_4_mins_df$total
 
-
-
 ```
 
 The following data shows the proportion of shots made by our players during the first 8 minutes of each period:
@@ -127,11 +126,7 @@ The following data shows the proportion of shots made by our players during the 
 f_8_mins_df
 ```
 
-This line graph offers an easier way to visualize the data:
-
-```{r}
-palette1 <- 
-```
+This graph offers an easier way to visualize the data:
 
 ```{r, echo=FALSE}
 ggplot(data=f_8_mins_df,aes(x=period,y=perc_made, color=name,group=name)) +

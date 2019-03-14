@@ -93,7 +93,7 @@ aggregated_shot_chart <- ggplot(data= shots_data) +
   annotation_custom(court_image,-250,250,-50,420) +
   geom_point(aes(x=x,y=y,color=shot_made_flag),size=0.5) +
   ylim(-50,420) +
-  ggtitle('Shot Chartr: GSW (2016 season)') +
+  ggtitle('Shot Chart: GSW (2016 season)') +
   theme_minimal() +
   facet_wrap( ~ name, nrow=2,ncol=3) +
   theme(legend.position="top")
