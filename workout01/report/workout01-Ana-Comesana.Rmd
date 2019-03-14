@@ -79,7 +79,8 @@ The previous statistics show that Kevin Durant is the player who makes the highe
 ## Data
 First, let's include some shot charts for the players:
 ```{r, echo=FALSE}
-("../images/gsw-shot-charts.pdf")
+knitr::include_graphics("../images/gsw-shot-charts.png")
+
 ```
 
 We will look at the proportion of shots made in the first 8 minutes of each period, and compare it to the proportion of shots made in the last 4 minutes (last third) of the period. 
