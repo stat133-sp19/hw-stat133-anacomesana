@@ -50,7 +50,7 @@ durant[durant_idx_n,'shot_made_flag'] = "shot_no"
 thompson_idx_y = which(thompson['shot_made_flag'] == 'y')
 thompson_idx_n = which(thompson['shot_made_flag'] == 'n')
 thompson[thompson_idx_y,'shot_made_flag'] = 'shot_yes'
-thompson[-thompson_idx_n,'shot_made_flag'] = "shot_no"
+thompson[thompson_idx_n,'shot_made_flag'] = "shot_no"
 
 curry_idx_y = which(curry['shot_made_flag'] == 'y')
 curry_idx_n = which(curry['shot_made_flag'] == 'n')
