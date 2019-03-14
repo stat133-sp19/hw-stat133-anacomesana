@@ -28,10 +28,12 @@ library(ggplot2)
 Report
 ======
 
+![](https://ewscripps.brightspotcdn.com/dims4/default/930777f/2147483647/strip/true/crop/640x360+0+60/resize/1280x720!/quality/90/?url=https%3A%2F%2Fsharing.wcpo.com%2Fsharescnn%2Fphoto%2F2018%2F06%2F08%2FGettyImages-970187260_1528515749467_89320790_ver1.0_640_480.jpg)
+
 Introduction
 ------------
 
-The Golden Statw Warriors are without a doubt one of the top NBA teams at the moment, but which player within the team is the true "cream of the crop"? To find this, I will look at the proportion of shots made, and what type of shots in relation to how much of the period has passed. This report attempts to analyze the performance of Golden State Warriors Andre Iguodala, Draymond Green, Kevin Durant, Klay Thompson and Stephen Curry by looking at the proportion of shots they are able to make and how it changes as the game goes on.
+The Golden State Warriors are without a doubt one of the top NBA teams at the moment, but which player within the team is the true "cream of the crop"? To find this, I will look at the proportion of shots made, and what type of shots in relation to how much of the period has passed. This report attempts to analyze the performance of Golden State Warriors Andre Iguodala, Draymond Green, Kevin Durant, Klay Thompson and Stephen Curry by looking at the proportion of shots they are able to make and how it changes as the game goes on.
 
 Motivation
 ----------
@@ -45,24 +47,7 @@ Below are some basic statistics relating to this report:
 
 1.  2 Point Effective Shooting Percentage by Player:
 
-``` r
-all_shooting_data <- read.csv('../data/shots-data.csv')
-all_2pters_data <- filter(all_shooting_data, shot_type == '2PT Field Goal')
-esp_2pt<- all_2pters_data %>%
-            group_by(name) %>%
-            summarise(total=n())
-
-esp_2pt$made <- (all_2pters_data %>%
-          group_by(name) %>%
-          count(shot_made_flag) %>%
-          filter(shot_made_flag == 'shot_yes'))$n
-          
-
-esp_2pt$perc_made <- esp_2pt$made/esp_2pt$total
-esp_2pt <- esp_2pt %>%
-            arrange(desc(perc_made))
-esp_2pt
-```
+<!-- -->
 
     ## # A tibble: 5 x 4
     ##   name           total  made perc_made
@@ -75,24 +60,7 @@ esp_2pt
 
 1.  3 Point Effective Shooting Percentage by Player:
 
-``` r
-all_3pters_data <- filter(all_shooting_data, shot_type == '3PT Field Goal')
-
-esp_3pt<- all_3pters_data %>%
-            group_by(name) %>%
-            summarise(total=n())
-
-esp_3pt$made <- (all_3pters_data %>%
-          group_by(name) %>%
-          count(shot_made_flag) %>%
-          filter(shot_made_flag == 'shot_yes'))$n
-          
-
-esp_3pt$perc_made <- esp_3pt$made/esp_3pt$total
-esp_3pt <- esp_3pt %>%
-            arrange(desc(perc_made))
-esp_3pt
-```
+<!-- -->
 
     ## # A tibble: 5 x 4
     ##   name           total  made perc_made
@@ -105,22 +73,7 @@ esp_3pt
 
 1.  Overall Effective Shooting Percentage by Player:
 
-``` r
-cum_esp<- all_shooting_data %>%
-            group_by(name) %>%
-            summarise(total=n())
-
-cum_esp$made <- (all_shooting_data %>%
-          group_by(name) %>%
-          count(shot_made_flag) %>%
-          filter(shot_made_flag == 'shot_yes'))$n
-          
-
-cum_esp$perc_made <- cum_esp$made/cum_esp$total
-cum_esp <- cum_esp %>%
-            arrange(desc(perc_made))
-cum_esp
-```
+<!-- -->
 
     ## # A tibble: 5 x 4
     ##   name           total  made perc_made

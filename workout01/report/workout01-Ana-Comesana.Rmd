@@ -11,6 +11,9 @@ library(ggplot2)
 
 # Report
 
+![](https://ewscripps.brightspotcdn.com/dims4/default/930777f/2147483647/strip/true/crop/640x360+0+60/resize/1280x720!/quality/90/?url=https%3A%2F%2Fsharing.wcpo.com%2Fsharescnn%2Fphoto%2F2018%2F06%2F08%2FGettyImages-970187260_1528515749467_89320790_ver1.0_640_480.jpg)
+
+
 ## Introduction
 The Golden State Warriors are without a doubt one of the top NBA teams at the moment, but which player within the team is the true "cream of the crop"? To find this, I will look at the proportion of shots made, and what type of shots in relation to how much of the period has passed. This report attempts to analyze the performance of Golden State Warriors Andre Iguodala, Draymond Green, Kevin Durant, Klay Thompson and Stephen Curry by looking at the proportion of shots they are able to make and how it changes as the game goes on.
 
