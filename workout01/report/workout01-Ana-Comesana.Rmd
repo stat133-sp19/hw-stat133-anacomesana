@@ -1,0 +1,173 @@
+---
+title: "Workout 01"
+author: "Ana Comesana"
+output: github_document
+---
+
+
+# Report
+
+## Introduction
+The Golden Statw Warriors are without a doubt one of the top NBA teams at the moment, but which player within the team is the true "cream of the crop"? To find this, I will look at the proportion of shots made, and what type of shots in relation to how much of the period has passed. This report attempts to analyze the performance of Golden State Warriors Andre Iguodala, Draymond Green, Kevin Durant, Klay Thompson and Stephen Curry by looking at the proportion of shots they are able to make and how it changes as the game goes on.
+
+## Motivation
+Making shots throughout the game is what every basketball player is paid to do, but which Golden State Warrior player can make the higher proportion of shots in the last couple of minutes of each period? What truly separates a good athlete from a great one is the ability to keep their calm and perform when the pressure is on- usually the last minutes of each period, when the counter is going down and the buzzer about to go off. This offers a good measure of how good a player is, their performance when stressed and tired.
+
+## Background
+Below are some basic statistics relating to this report:
+
+1. 2 Point Effective Shooting Percentage by Player:
+```{r}
+all_shooting_data <- read.csv('../data/shots-data.csv')
+all_2pters_data <- filter(all_shooting_data, shot_type == '2PT Field Goal')
+esp_2pt<- all_2pters_data %>%
+            group_by(name) %>%
+            summarise(total=n())
+
+esp_2pt$made <- (all_2pters_data %>%
+          group_by(name) %>%
+          count(shot_made_flag) %>%
+          filter(shot_made_flag == 'shot_yes'))$n
+          
+
+esp_2pt$perc_made <- esp_2pt$made/esp_2pt$total
+esp_2pt <- esp_2pt %>%
+            arrange(desc(perc_made))
+esp_2pt
+```
+
+2. 3 Point Effective Shooting Percentage by Player:
+```{r}
+all_3pters_data <- filter(all_shooting_data, shot_type == '3PT Field Goal')
+
+esp_3pt<- all_3pters_data %>%
+            group_by(name) %>%
+            summarise(total=n())
+
+esp_3pt$made <- (all_3pters_data %>%
+          group_by(name) %>%
+          count(shot_made_flag) %>%
+          filter(shot_made_flag == 'shot_yes'))$n
+          
+
+esp_3pt$perc_made <- esp_3pt$made/esp_3pt$total
+esp_3pt <- esp_3pt %>%
+            arrange(desc(perc_made))
+esp_3pt
+```
+
+3. Overall Effective Shooting Percentage by Player:
+```{r}
+cum_esp<- all_shooting_data %>%
+            group_by(name) %>%
+            summarise(total=n())
+
+cum_esp$made <- (all_shooting_data %>%
+          group_by(name) %>%
+          count(shot_made_flag) %>%
+          filter(shot_made_flag == 'shot_yes'))$n
+          
+
+cum_esp$perc_made <- cum_esp$made/cum_esp$total
+cum_esp <- cum_esp %>%
+            arrange(desc(perc_made))
+cum_esp
+```
+
+The previous statistics show that Kevin Durant is the player who makes the highest percentage of overall shots, followed by Iguodala only 3% behind him. We see that overall there is a higher proportion of 2 pionters made than 3 pinters (which makes sense), and that Klay Thompson and Stephen Curry are the two players who are able to make the highest proportion of 3 pointers, while Andre Iguodala and Kevin Durant lead the pack for proportion of 2 pointers made. Overall, there is no one player that stands out most when we analyze these statistics, which is why this report hopes to offer some sort of distinction as to who the better athlete is. 
+
+## Data
+First, let's include some shot charts for the players:
+```{r, echo=FALSE}
+("../images/gsw-shot-charts.pdf")
+```
+
+We will look at the proportion of shots made in the first 8 minutes of each period, and compare it to the proportion of shots made in the last 4 minutes (last third) of the period. 
+
+
+```{r echo=FALSE}
+first_8_mins <- all_shooting_data[all_shooting_data['minutes_remaining'] > 4,]
+last_4_mins <- all_shooting_data[all_shooting_data['minutes_remaining'] <= 4,]
+
+
+f_8_mins_df<- first_8_mins %>%
+            group_by(name,period) %>%
+            summarise(total=n())
+
+f_8_mins_df$made <- (first_8_mins %>%
+          group_by(name,period) %>%
+          count(shot_made_flag) %>%
+          filter(shot_made_flag == 'shot_yes'))$n
+          
+
+f_8_mins_df$perc_made <- f_8_mins_df$made/f_8_mins_df$total
+
+l_4_mins_df<- last_4_mins %>%
+            group_by(name,period) %>%
+            summarise(total=n())
+
+l_4_mins_df$made <- (last_4_mins %>%
+          group_by(name,period) %>%
+          count(shot_made_flag) %>%
+          filter(shot_made_flag == 'shot_yes'))$n
+          
+
+l_4_mins_df$perc_made <- l_4_mins_df$made/l_4_mins_df_df$total
+
+
+
+```
+
+The following data shows the proportion of shots made by our players during the first 8 minutes of each period:
+```{r , echo=FALSE}
+f_8_mins_df
+```
+
+This line graph offers an easier way to visualize the data:
+
+```{r}
+palette1 <- 
+```
+
+```{r, echo=FALSE}
+ggplot(data=f_8_mins_df,aes(x=period,y=perc_made, color=name,group=name)) +
+  geom_point() + geom_line() +
+  ggtitle("Proportion of Shots Made During the First 8 Minutes of Each Period")
+```
+
+Likewise, here is the table and plot for the porpotion of shots made during the last 4 minutes of each period:
+```{r, echo=FALSE}
+l_4_mins_df
+```
+
+```{r, echo=FALSE}
+ggplot(data=l_4_mins_df,aes(x=period,y=perc_made, color=name,group=name)) +
+  geom_point() + geom_line() +
+  ggtitle("Proportion of Shots Made During the Last 4 Minutes of Each Period")
+```
+
+
+For easier analysis, I have combined these two tables and plots below:
+```{r, echo=FALSE}
+f_8_mins_df$time <- 'first'
+l_4_mins_df$time<- 'last'
+prop_made <- rbind(f_8_mins_df,l_4_mins_df)
+prop_made <- prop_made %>%
+            arrange(name,period) 
+ggplot(data=prop_made,aes(x=period,y=perc_made,color=time)) +
+  geom_point() + geom_line() +
+  facet_wrap(~name)
+
+
+```
+
+## Analysis and Discussion
+
+From the following plots, we can see that Iguodala outperforms every other player in the first period, with his percentage of shots made for both the first 8 minutes and last 4 minutes being higher than anyone else's, although Kevin Durant is a close second. Kevin Durant seems to outperform his peers during the 2nd period, both during the first 8 minutes and last 4 minutes. Draymond Green has the most interesting 3rd period, with a highly variable performance. During the last 4 minutes, the percentage of shots he is able to make drops by 40%, the biggest gap visible in these plots. Thompson seems to be the only player who does worse during the last 4 minutes of the 4th period than during the first 8 minutes. This may be due to the fact that fatigue may hit him harder than the other players. 
+
+It is interesting to note a trend in Draymond Green and Kevin Durant and Andre Iguodala's overall performance. Their performances during the first 8 minutes and last 4 minutes of any given period seem to "balance" each other out. If they do relatively well during the first 8 minutes, like Draymond Green in the 3rd period, their performance is lacking during the last 4 minutes.Likewise, Andre Iguodala's performance seemed to be lacking on average during the first 8 minutes of the 2nd period, but it vastly differs to his performance during the last 4 mintues of the period, this could be because he starts the period usually fairly tired but tries to make it up at the end.    
+
+Overall, we can see that Stephen Curry's performance during the last 4 minutes of the period improves as we get further ino the game, a trend that no other player has. This could indicate that Curry is indeed an athlete who is able to keep his head calm during difficult situations and who outperforms himself in situations of stress. In contrast, Thompson's performance during the last 4 minutes of the game gets worse, with his overall lowest percentage of shots made being during the last 4 minutes of the 4th period. Andre Iguodala has a similar trend as well, with an up to 20% difference in percentage of shots made during the last 4 minutes of the first and last periods.
+
+## Conclusion
+Overall, I would agree with popular belief on Stephen Curry being the best athlete out of the players we analyzed. Not only is his performance better during the last 4 minutes of each period, showing that he is able to keep his head calm under pressure and perform better than he has during the rest of the period. His performance also increases as it get later in the game, with a higher percentage of shots being made during the last 4 minutes of the last period than at almost any other time during the game. 
