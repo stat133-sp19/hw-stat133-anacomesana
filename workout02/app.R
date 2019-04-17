@@ -5,7 +5,7 @@
 # Find out more about building applications with Shiny here:
 #
 #    http://shiny.rstudio.com/
-# https://caseyc49.shinyapps.io/workout02-casey-chadwell/
+#   https://anacomesana.shinyapps.io/shinyapp10/
 
 library(shiny)
 library(ggplot2)
@@ -68,7 +68,8 @@ ui <- fluidPage(
              value = 1000,
              min = 1,
              max = 100000,
-             step = 500
+             step = 500,
+             pre = '$'
            ),
            sliderInput(
              'contrib',
@@ -76,7 +77,8 @@ ui <- fluidPage(
              value = 2000,
              min = 0,
              max = 50000,
-             step = 500
+             step = 500,
+             pre = '$'
            )
     ),
     column(4,
