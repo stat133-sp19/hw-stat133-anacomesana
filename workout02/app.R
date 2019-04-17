@@ -170,7 +170,7 @@ server <- function(input, output) {
         name = 'Time Since Initial Investment (in years)') +
       scale_y_continuous(
         name = 'Account Balance (in $1000)') +
-      theme_grey() +
+      theme_grey() + 
       ggtitle( "Growth Rates by Investment Mode" )
     if (input$facet == 'Yes') {
       the_plot <- the_plot + 
