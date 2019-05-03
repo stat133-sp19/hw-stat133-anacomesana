@@ -152,7 +152,7 @@ summary.binvar <- function(distr) {
 
 #' @export
 print.summary.binvar <- function(sm) {
- format(paste0(print.binvar(sm),
+ cat(format(paste0(print.binvar(sm),
    '\n\nMeasures\n- mean: ',
             sm$mean,
             '\n- variance:',
@@ -163,5 +163,6 @@ print.summary.binvar <- function(sm) {
             sm$skewness,
             '\n- kurtosis: ',
             sm$kurtosis)
+    )
    )
 }

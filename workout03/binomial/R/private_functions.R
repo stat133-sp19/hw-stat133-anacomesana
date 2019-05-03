@@ -11,7 +11,7 @@ check_prob <-function(prob) {
     return(TRUE)
   }
   else {
-    stop('probability out of bounds [0,1]')
+    stop('probability not valid or out of bounds [0,1]')
   }
 }
 
@@ -81,9 +81,13 @@ aux_variance <- function(trials,prob) {
 # Output
 #   mode of the binomial distribution
 aux_mode <- function(trials,prob) {
+  if (prob==1) {
+    return(trials)
+  }
+  else {
   return(as.integer(floor(trials * prob + prob)))
+    }
 }
-
 # Description: returns skewness of binomial distribution
 # Inputs
 #   trials: the number of trials (numeric)
