@@ -1,0 +1,119 @@
+---
+title: "Introduction"
+author: "Ana Comesana"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(devtools)
+library(binomial)
+```
+
+# Binomial Package - Ana Comesana
+I created this package for the purpose of completing the **workout 3** assignment for Stat 133 at UC Berkeley. The following binomial package contains functions, objects and methods regarding binomial distributions.
+
+## Basic Statistics Functions
+The most basic functions in this package are those to calculate different statistics on the binomial distribution of the user's choice. The user will be able to calculate the mean, variance, skewness, and more of the binomial distribution. 
+
+```{r}
+number_trials <- 5
+probability_success <- 0.5
+```
+
+#### Mean
+```{r}
+bin_mean(number_trials,probability_success)
+```
+
+#### Variance
+```{r}
+bin_variance(number_trials,probability_success)
+```
+
+#### Mode
+```{r}
+bin_mode(number_trials,probability_success)
+```
+
+#### Skewness
+```{r}
+bin_skewness(number_trials,probability_success)
+```
+
+#### Kurtosis
+```{r}
+bin_kurtosis(number_trials, probability_success)
+```
+
+All of these measures have the following constraints:
+- probability must be a number between 0 and 1
+- number of trials must be non-negative
+
+## Other Distribution Objects
+This package also has the option of creating the following distribution objects:
+- bindis
+- bincum
+Both of them inherit from the object data.frame.
+
+#### Binomial Distribution Objects
+The 'bindis' objects are displayed as a data.frame with columns for number of successes and probability that we will achieve that numbe of successes.
+
+```{r}
+#Arguments
+trials <- 5 
+prob <- 0.5
+
+#Binomial Distribution Object
+binom_dist <- bin_distribution(trials, prob)
+
+# 'bindis' as data.frame
+binom_dist
+
+# plot() will plot our 'bindis' object
+plot(binom_dist)
+```
+
+#### Cumulative Binomial Distribution Objects
+The 'bincum' objects are also displayed as a data.frame, much like 'bindis', except they also include a column showing the cumulative probability of each success.
+
+```{r}
+# Arguments
+trials <- 5
+prob <- 0.5
+
+# Cumulative Binomial Distribution object
+cum_dist <- bin_cumulative(trials,prob)
+
+# 'bincum' as data.frame
+cum_dist
+
+# plot() will plot our 'bincum' object, different from 'bindis'
+plot(cum_dist)
+```
+
+##Binomial Variable Object
+
+The final element in this package is a Binomial Variable object, which has class 'binvar'. This object represents a random variable for our binomial distribution, and the user may initialize it by simply calling 'bin_variable()'
+
+```{r}
+#Arguments
+trials <- 5
+prob <- 0.5
+
+#Binomial Variable Object
+bin_var <- bin_variable(trials,prob)
+
+# Displaying object
+bin_var
+
+# summary() of 'binvar'
+bin_var_sum <- summary(bin_var)
+bin_var_sum
+```
+

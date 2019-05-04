@@ -1,0 +1,10 @@
+bin_choose              Binomial choose function
+bin_cumulative          Cumulative Binomial Distribution function
+bin_distribution        Binomial Distribution function
+bin_kurtosis            Binomial Kurtosis function
+bin_mean                Binomial Mean function
+bin_mode                Binomial Mode function
+bin_probability         Binomial probability function
+bin_skewness            Binomial Skewness function
+bin_variable            Binomial Random Variable function
+bin_variance            Binomial Variance function
